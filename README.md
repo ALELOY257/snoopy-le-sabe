@@ -14,5 +14,5 @@ The implementation of the project will be with an FPGA colorlight 5a-75e, a moto
 ## Members of the project
 The memebers and collaborators for this project are:
 - Luisa Gomez ()
-- Paula Téllez ()
+- Paula Téllez (@marute0)
 - Alejandro Leal (@ALELOY257)
