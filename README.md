@@ -2,7 +2,7 @@
 Le sabe
 
 ## Description
-This project is a PoC of an autonomously driven car, for it we will design a physical UI to see the car's telemetry and the objective is for 
+This project is a PoC of an autonomously driven car, for it we will design a physical UI to see the car's telemetry and the objectives are:
 1. Succesfully working screen in car
 2. Real statistics shown (revs, pwm, distance)
 3. Real movements
