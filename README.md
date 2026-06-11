@@ -1,7 +1,6 @@
 # snoopy-le-sabe
 
 ## Miembros del proyecto:
-- Luisamaria Gomez (@luisamariag)
 - Paula Téllez (@marute0)
 - Alejandro Leal (@ALELOY257)
 
