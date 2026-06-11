@@ -1,0 +1,93 @@
+$date
+	Tue Mar 31 18:21:10 2026
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module framebuffer_tb $end
+$var wire 24 ! pixel_out [23:0] $end
+$var reg 1 " clk $end
+$var reg 10 # read_addr [9:0] $end
+$var reg 10 $ write_addr [9:0] $end
+$var reg 24 % write_data [23:0] $end
+$var reg 1 & write_en $end
+$scope module instance1 $end
+$var wire 1 " clk $end
+$var wire 10 ' read_addr [9:0] $end
+$var wire 10 ( write_addr [9:0] $end
+$var wire 24 ) write_data [23:0] $end
+$var wire 1 & write_en $end
+$var reg 24 * pixel_out [23:0] $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+$end
+#0
+$dumpvars
+bx *
+b111111110000000000000000 )
+b101 (
+bx '
+1&
+b111111110000000000000000 %
+b101 $
+bx #
+0"
+bx !
+$end
+#20000
+1"
+#40000
+0"
+b101 #
+b101 '
+#60000
+b111111110000000000000000 !
+b111111110000000000000000 *
+1"
+#80000
+0"
+b11111111 %
+b11111111 )
+b1111111111 $
+b1111111111 (
+#100000
+1"
+#120000
+0"
+b1111111111 #
+b1111111111 '
+#140000
+b11111111 !
+b11111111 *
+1"
+#160000
+0"
+b101010101011101111001100 %
+b101010101011101111001100 )
+b0 $
+b0 (
+#180000
+1"
+#200000
+0"
+b1000100100010 %
+b1000100100010 )
+0&
+#220000
+1"
+#240000
+0"
+b0 #
+b0 '
+#260000
+b101010101011101111001100 !
+b101010101011101111001100 *
+1"
+#280000
+0"
