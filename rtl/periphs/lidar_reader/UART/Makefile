@@ -8,7 +8,7 @@ OBJS = uart.v \
        comparador_time_bit.v \
        uart_control.v
 
-ECP5_SIM_CELLS=../lattice_sim/cells_sim_ecp5.v
+ECP5_SIM_CELLS=/home/marute/snoopy-le-sabe/rtl/periphs/lidar_reader/UART/lattice_sim/cells_sim_ecp5.v
 
 
 sim:

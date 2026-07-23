@@ -10,7 +10,7 @@ module contador (
     
     assign counter = counter_reg;
     
-    always @(posedge clk) begin
+    always @(negedge clk) begin
         if (RESET) begin
             counter_reg <= 10'b0000000000;
         end else if (ADD) begin

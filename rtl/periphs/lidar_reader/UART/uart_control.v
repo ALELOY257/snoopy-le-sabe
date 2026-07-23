@@ -24,7 +24,6 @@ module uart_control #(
     input zero,
     input E,
     input rx_line,
-    input rx_received,
     input data_received,
     input rst_n,
     
@@ -47,103 +46,104 @@ module uart_control #(
     always @(posedge clk) begin
 
         if(!rst_n) begin
-            current_state = START;
+            current_state <= START;
             
         end else begin
 
             case (current_state)
                 START: begin
-                    current_state = CHECK_SB0;
+                    current_state <= CHECK_SB0;
+                    count <= 5'd0;
                 end
 
                 CHECK_SB0: begin
-                    if(rx_line) begin
-                        current_state = ADD_COUNT0;
+                    if(!rx_line) begin
+                        current_state <= ADD_COUNT0;
                     end else begin 
-                        current_state = CHECK_SB0;
+                        current_state <= CHECK_SB0;
                     end
                 end
 
 
 
                 ADD_COUNT0: begin
-                    current_state = CHECK_COUNT0;
+                    current_state <= CHECK_COUNT0;
                 end
 
                 CHECK_COUNT0: begin
                     if(E) begin
-                        current_state = CHECK_SB1;
+                        current_state <= CHECK_SB1;
                     end else begin 
-                        current_state = ADD_COUNT0;
+                        current_state <= ADD_COUNT0;
                     end
                 end
 
                 CHECK_SB1: begin
-                   if(E) begin
-                        current_state = CHECK_SB1;
+                   if(!rx_line) begin
+                        current_state <= SH_RST;
                     end else begin 
-                        current_state = ADD_COUNT0;
+                        current_state <= START;
                     end
                 end
 
                 SH_RST: begin
-                    current_state = ADD_COUNT1;
+                    current_state <= ADD_COUNT1;
                 end
 
                 ADD_COUNT1: begin
-                    current_state = CHECK_COUNT1;
+                    current_state <= CHECK_COUNT1;
                 end
 
                 CHECK_COUNT1: begin
                     if (E) begin
-                        current_state = CHECK_I;
+                        current_state <= CHECK_I;
                     end else begin
-                        current_state = ADD_COUNT1;
+                        current_state <= ADD_COUNT1;
                     end
                 end
 
                 CHECK_I: begin
                     if (zero) begin
-                        current_state = CHECK_EB;
+                        current_state <= CHECK_EB;
                     end else begin
-                        current_state = DEC_I;
+                        current_state <= DEC_I;
                     end
                 end
 
                 DEC_I: begin
-                    current_state = SH_RST;
+                    current_state <= SH_RST;
                 end
 
                 CHECK_EB: begin
                     if (rx_line) begin
-                        current_state = RX_AVAIL;
+                        current_state <= RX_AVAIL;
                     end else begin
-                        current_state = RX_ERROR;
+                        current_state <= RX_ERROR;
                     end
                 end
 
                 RX_AVAIL: begin
-                    current_state = CHECK_RECEV;
+                    current_state <= CHECK_RECEV;
                 end
 
                 RX_ERROR: begin
-                    current_state = END_STATE;
+                    current_state <= END_STATE;
                 end
 
                 CHECK_RECEV: begin
                     if (data_received) begin
-                        current_state = END_STATE;
+                        current_state <= END_STATE;
                     end else begin
-                        current_state = CHECK_RECEV;
+                        current_state <= CHECK_RECEV;
                     end
                 end
 
                 END_STATE: begin
                     count = count + 1;
-                    current_state = (count>28) ? START : END_STATE ;
+                    current_state <= (count>28) ? START : END_STATE ;
                 end
 
-                default: current_state = START;
+                default: current_state <= START;
             
             endcase
         end
@@ -213,7 +213,7 @@ always @(*) begin
         SH_RST: begin
             LD    = 1'b0;
             ADD = 1'b0;
-            SEL   = 1'b0;
+            SEL   = 1'b1;
             SH   = 1'b1;
             DEC  = 1'b0;
             RESET  = 1'b1;
@@ -224,7 +224,7 @@ always @(*) begin
         ADD_COUNT1: begin
             LD    = 1'b0;
             ADD = 1'b1;
-            SEL   = 1'b0;
+            SEL   = 1'b1;
             SH   = 1'b0;
             DEC  = 1'b0;
             RESET  = 1'b0;
@@ -235,7 +235,7 @@ always @(*) begin
         CHECK_COUNT1: begin
             LD    = 1'b0;
             ADD = 1'b0;
-            SEL   = 1'b0;
+            SEL   = 1'b1;
             SH   = 1'b0;
             DEC  = 1'b0;
             RESET  = 1'b0;
@@ -258,7 +258,7 @@ always @(*) begin
         DEC_I: begin
             LD    = 1'b0;
             ADD = 1'b0;
-            SEL   = 1'b0;
+            SEL   = 1'b1;
             SH   = 1'b0;
             DEC  = 1'b1;
             RESET  = 1'b0;
@@ -296,7 +296,7 @@ always @(*) begin
             DEC  = 1'b0;
             RESET  = 1'b0;
             rx_error = 1'b0;
-            data_available = 1'b0;
+            data_available = 1'b1;
         end
 
         RX_ERROR: begin

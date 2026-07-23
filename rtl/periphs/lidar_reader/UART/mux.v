@@ -7,9 +7,9 @@ module mux (
 
 always @(*) begin
     if (SEL) begin
-        time_bit = 10'b0011011001;
+        time_bit = 10'b0001101100;
     end else begin
-        time_bit = 10'b0001101101;
+        time_bit = 10'b0000110110;
     end
 end
 

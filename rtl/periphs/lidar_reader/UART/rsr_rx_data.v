@@ -7,15 +7,15 @@ module rsr_rx_data (
     output [7:0] rx_data
 );
 
-    reg [7:0] rx_data_reg;
+    reg [9:0] rx_data_reg;
     
-    assign rx_data = rx_data_reg;
+    assign rx_data = rx_data_reg[8:1];
     
-    always @(posedge clk) begin
+    always @(negedge clk) begin
         if (LD) begin
-            rx_data_reg <= 8'b00000000;
+            rx_data_reg <= 10'b00000000;
         end else if (SH) begin
-            rx_data_reg <= {rx_line, rx_data_reg[7:1]};
+            rx_data_reg <= {rx_line, rx_data_reg[9:1]};
         end
     end
     

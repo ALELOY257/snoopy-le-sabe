@@ -18,7 +18,7 @@ wire equal;
 
 wire load;
 wire dec;
-wire SH;
+wire shift;
 wire reset;
 wire add;
 wire SEL;
@@ -66,7 +66,8 @@ comparador_time_bit comparador_time_bit (
 uart_control uart_control (
     .clk(clk),
     .rst_n(rst_n),
-    .rx_received(rx_received),
+    .rx_line(rx_line),
+    .data_received(data_received),
     .zero(zero),
     .E(equal),
     
