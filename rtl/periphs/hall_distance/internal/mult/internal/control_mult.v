@@ -19,7 +19,7 @@ module control_mult(
   parameter ADD   = 3'b011;
   parameter END   = 3'b100;
 
-  parameter COUNT_INIT = 4;   
+  parameter COUNT_INIT = 8;   
   reg [2:0] state, next_state;
   reg [2:0] count, next_count;
 

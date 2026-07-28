@@ -2,13 +2,13 @@ module mult_top(
     input clk,
     input rst, 
     input init, 
-    input  [3:0] A, 
-    input  [3:0] B, 
+    input  [7:0] A, 
+    input  [7:0] B, 
     output [RES_WIDTH-1:0]pp, 
     output done
     );
-    parameter A_WIDTH = 4;
-    parameter B_WIDTH = 4;
+    parameter A_WIDTH = 8;
+    parameter B_WIDTH = 8;
     parameter RES_WIDTH = A_WIDTH + B_WIDTH;
 
     wire shift, reset, add, z;
@@ -39,7 +39,7 @@ module mult_top(
 
     lsr #(.WIDTH(A_WIDTH)) lsr_instance (
         .clk(clk), 
-        .in_A({{B_WIDTH{1'b0}}, A}),
+        .in_A(A),
         .shift(shift), 
         .load(reset), 
         .s_A(w_A)
