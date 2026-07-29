@@ -3,7 +3,6 @@ module distance_reg(
     input rst,
     input LD,
     input LDV,
-    input [7:0] pp,
     output reg [7:0] distance
 );
     always @(posedge clk) begin
@@ -12,7 +11,6 @@ module distance_reg(
         else if (LD)
             distance <= 0;
         else if (LDV)
-            distance <= pp;
-        
+            distance <= distance + 8'd19;
     end
 endmodule

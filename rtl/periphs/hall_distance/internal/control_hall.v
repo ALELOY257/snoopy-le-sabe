@@ -2,11 +2,9 @@ module control_hall(
     input clk,
     input rst,
     input HA,
-    input v,
     input init,
     output reg PADD,
     output reg LD,
-    output reg DMULT,
     output reg LDV
 );
 
@@ -14,9 +12,7 @@ module control_hall(
     localparam F_INACTIVE = 3'b001;
     localparam F_ACTIVE = 3'b010;
     localparam PCOUNT = 3'b011;
-    localparam MULT = 3'b100;
-    localparam CHECKMULT = 3'b101;
-    localparam DONEDISTANCE = 3'b110;
+    localparam ADD_DISTANCE = 3'b100;
 
     reg [2:0] current_state, next_state;
 
@@ -45,19 +41,10 @@ module control_hall(
             end
 
             PCOUNT: begin
-                next_state <= MULT;
+                next_state <= ADD_DISTANCE;
             end
 
-            MULT: begin
-                next_state <= CHECKMULT;
-            end
-
-            CHECKMULT: begin
-                if (v) next_state <= DONEDISTANCE;
-                else next_state <= F_INACTIVE;
-            end
-
-            DONEDISTANCE: begin
+            ADD_DISTANCE: begin
                 next_state <= F_INACTIVE;
             end
 
@@ -68,7 +55,6 @@ module control_hall(
     always @(*) begin
         PADD = 0;
         LD = 0;
-        DMULT = 0;
         LDV = 0;
         case (current_state)
             START: begin
@@ -85,14 +71,7 @@ module control_hall(
                 PADD=1;
             end
 
-            MULT: begin
-                DMULT=1;
-            end
-
-            CHECKMULT: begin
-            end
-
-            DONEDISTANCE: begin
+            ADD_DISTANCE: begin
                 LDV = 1;
             end
 

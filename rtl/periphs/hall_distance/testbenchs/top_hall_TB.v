@@ -21,7 +21,7 @@ module top_hall_tb;
     always #20 clk = ~clk;   // 25 MHz clock, 40 ns period
 
     initial begin
-        $dumpfile("top_hall_tb.vcd");
+        $dumpfile("top_hall_TB.vcd");
         $dumpvars(0, top_hall_tb);
 
         rst = 1'b1;

@@ -1,11 +1,11 @@
-TARGET= top
+TARGET= top_hall
 
-OBJS  = internal/acc.v \
-		internal/comp.v \
-		internal/control_mult.v \
-		internal/lsr.v \
-		internal/rsr.v \
-		top.v
+OBJS  = top_hall.v \
+		internal/comparador.v \
+		internal/contador.v \
+		internal/control_hall.v \
+		internal/distance_reg.v \
+		internal/flanco.v
 
 ICE40_SIM_CELLS=$(shell yosys-config --datdir/ecp5/cells_sim.v)
 
