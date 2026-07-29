@@ -27,7 +27,7 @@ module top_motor_tb;
     always #20 clk = ~clk;   // 25 MHz, 40 ns period
 
     initial begin
-        $dumpfile("top_motor_tb.vcd");
+        $dumpfile("top_motor_TB.vcd");
         $dumpvars(0, top_motor_tb);
 
         rst = 1'b1;

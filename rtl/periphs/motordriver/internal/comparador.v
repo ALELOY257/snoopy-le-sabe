@@ -15,7 +15,7 @@ module comparador(
         case (mode)
             2'b00: v = (a == b);
             2'b01: v = (a < b);
-            2'b10: v = (b < a);
+            2'b10: v = (a >= b);
             2'b11: v = (a == 1'b1 && c < d);
             default: v = 1'b0;
         endcase

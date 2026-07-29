@@ -55,8 +55,8 @@ module top_motor(
     );
 
     comparador u_comp_time(
-        .a(time_count), .b(250000), .mode(2'b00),
-        .v(v_time)
+        .a(time_count), .b(32000), .mode(2'b10), // this is temporary, it should evaluate to 250000 with a running counter but the add to time was happening every few cycles. this should be a future good practices upgrade
+        .v(v_time) 
     );
 
     ramp_tick_reg u_ramp_tick( // this could be omitted with v_time, for now and for clarity, it will remain like this
@@ -71,7 +71,7 @@ module top_motor(
 
     comparador u_comp_pwmdc(
         .a(pwm_count), .b(dc_count), .mode(2'b01),
-        .pwm(pwm)
+        .v(pwm)
     );
     
 endmodule
